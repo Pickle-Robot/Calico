@@ -9,8 +9,7 @@ DOCKER_BASE=$(dirname "$(realpath "${BASH_SOURCE[0]}")")/..
 export USER_ID=$(id -u)
 export GID=$(id -g)
 
-docker run --rm \
-    --user $USER_ID:$GID \
-    -v ./:/calico:rw \
+docker run -it --rm \
+    -v $(pwd):/calico:rw \
     ghcr.io/yangjames/calico:latest \
-    /bin/bash -c "python3 -m venv venv && . ./venv/bin/activate && pip wheel --no-deps -w wheels ."
+    /bin/bash 

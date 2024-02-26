@@ -15,7 +15,7 @@
 #include "pybind11/stl.h"
 
 
-PYBIND11_MODULE(native, m) {
+PYBIND11_MODULE(calico_native, m) {
   m.doc() = "Native code for calico";
   namespace py = pybind11;
   using namespace calico;

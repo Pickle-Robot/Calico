@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
-project (Calico)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build/bin)
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build/lib)
+# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build/lib)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build/bin)
 
 # Turn off testing by default.
 include(CTest)
@@ -456,13 +455,13 @@ if (BUILD_TESTING)
   # Python bindings test.
   add_test(
     NAME python_bindings_test
-    COMMAND python3 -m pytest ${CMAKE_CURRENT_LIST_DIR}/calico/test/python_bindings_test.py
+    COMMAND python3 -m unittest ${CMAKE_CURRENT_LIST_DIR}/calico/test/python_bindings_test.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/calico/test
     )
   # Python utilities test.
   add_test(
     NAME python_utils_test
-    COMMAND python3 -m pytest ${CMAKE_CURRENT_LIST_DIR}/calico/test/python_utils_test.py
+    COMMAND python3 -m unittest ${CMAKE_CURRENT_LIST_DIR}/calico/test/python_utils_test.py
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/calico/test
     )
   set_tests_properties(

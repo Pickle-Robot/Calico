@@ -1,20 +1,32 @@
 [build-system]
 requires = [
   "setuptools",
-  "wheel",
-  "pybind11",
-  "pybind11[global]",
+  "build",
+  "pybind11[global]>=2.11.1",
+  "ninja",
+  "auditwheel",
   "cmake>=3.12"
 ]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages= ["calico"]
-package-dir = {"" = "python"}
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint]
+extend-select = [
+  "B",   # flake8-bugbear
+  "I",   # isort
+  "PGH", # pygrep-hooks
+  "RUF", # Ruff-specific
+  "UP",  # pyupgrade
+]
+
+[tool.cibuildwheel]
+test-command = "python -m unittest src.calico.test"
 
 [project]
 name = "calico"
-version = "0.1.0"
+version = "0.1.1"
 description="A visual-inertial calibration library designed for rapid problem construction and debugging."
 readme = "README.md"
 authors = [
@@ -29,6 +41,7 @@ classifiers = [
   "Operating System :: Unix",
   "Programming Language :: Python",
 ]
+requires-python = ">= 3.10"
 dependencies = [
   'numpy == 1.26.0',
   "opencv-python-headless == 4.8.0.74",
@@ -37,10 +50,11 @@ dependencies = [
 
 [project.optional-dependencies] # Optional
 test = [
-  'pytest>=6.0',
-  "scipy"
+  "scipy",
+  "pytest"
 ]
 
 
 [project.urls]
 "Homepage" = "https://github.com/yangjames/Calico.git"
+

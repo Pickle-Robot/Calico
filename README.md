@@ -49,21 +49,21 @@ make install
 
 ## Python
 
-Note: For the Python wheel you do _not_ need to compile the native code first. The wheel is self-contained.
+### Generating the python wheel
 
-From main directory:
+From your host container run:
 
-```bash
-pip wheel --no-deps -w wheels .
 ```
-
-### Docker
-
-If you have docker and just want the python wheel, you don't need to install any dependencies and can simply run:
-
 ./scripts/build-python.sh
 
-and sit back and relax. Eventually you'll find the wheel in the `wheels` folder.
+```
+
+The self-contained wheel will be saved into the wheelhouse directory.
+
+### Running code from the wheel
+
+The wheel wraps the native source in the module *calico.calico_native* and the python utils in *calico.utils*.
+
 
 # License
 Poor sensor calibration is a problem endemic to robotics, yet it's typically not given enough attention because it tends to detract from higher level project goals. The purpose of this library is to help roboticists quickly resolve their calibration issues so that they can move on to more interesting things. This library is hereby granted the MIT license, to be used free of charge by anyone within academia or industry.

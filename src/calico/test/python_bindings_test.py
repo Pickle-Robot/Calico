@@ -1,8 +1,7 @@
-import calico_native.calico_native as calico_native
+import calico.calico_native as calico_native
 
 import numpy as np
 import unittest
-import copy
 
 class TestCalicoPythonBindings(unittest.TestCase):
 

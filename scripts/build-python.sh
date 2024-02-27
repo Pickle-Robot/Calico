@@ -12,4 +12,4 @@ export GID=$(id -g)
 docker run -it --rm \
     -v $(pwd):/calico:rw \
     ghcr.io/yangjames/calico:latest \
-    /bin/bash 
+    /bin/bash -c "python3 -m build --wheel && auditwheel repair --plat manylinux_2_35_x86_64 dist/calico-*-linux_x86_64.whl"

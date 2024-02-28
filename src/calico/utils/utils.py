@@ -1,16 +1,15 @@
 """@package Python utils
 Utility functions for calico python bindings.
 """
-import calico
+import calico.calico_native as calico_native
 
 import cv2
 import numpy as np
-from typing import Dict, List, Tuple, Union
-import yaml
+from typing import Dict, List, Tuple
 
 
 def ComputeRmseHeatmapAndFeatureCount(
-  measurement_residual_pairs: List[Tuple[calico.CameraMeasurement, np.ndarray]],
+  measurement_residual_pairs: List[Tuple[calico_native.CameraMeasurement, np.ndarray]],
   image_width: int, image_height: int, num_rows:int = 8, num_cols:int = 12,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
   """ Compute the RMSE heatmap with specified resolution.
@@ -82,13 +81,13 @@ def DetectionsToCameraMeasurements(
     detections: Dict[int, np.ndarray],
     stamp: float,
     seq: int,
-) -> List[calico.CameraMeasurement]:
+) -> List[calico_native.CameraMeasurement]:
   """Convenience function for converting a calibration chart detection into
   camera measurement types.
   """
   measurements = []
   for feature_id, point in detections.items():
-    measurement = calico.CameraMeasurement()
+    measurement = calico_native.CameraMeasurement()
     measurement.id.stamp = stamp
     measurement.id.image_id = seq
     measurement.id.model_id = 0  # always 0 for Aprilgrid since multiple
@@ -123,7 +122,7 @@ def InitializePinholeAndPoses(
           [ 0 fy cy]
           [ 0  0  1]
     R_chart_camera:
-      List of 3x3 
+      List of 3x3
   """
   V = np.zeros((2*len(all_detections), 6))
   H_camera_chart = []

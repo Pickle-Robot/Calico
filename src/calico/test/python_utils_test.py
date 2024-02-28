@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import calico
+from calico.utils import DetectionsToCameraMeasurements, InitializePinholeAndPoses
 
 import numpy as np
 from scipy.spatial.transform import Rotation as R
@@ -14,7 +14,7 @@ class TestCalicoPythonUtils(unittest.TestCase):
             test_detections[i] = np.array([float(i), float(i)])
         test_stamp = 1.0
         test_seq = 32
-        measurements = calico.DetectionsToCameraMeasurements(
+        measurements = DetectionsToCameraMeasurements(
             test_detections, test_stamp, test_seq)
         self.assertEqual(len(measurements), len(test_detections))
         for measurement in measurements:
@@ -75,7 +75,7 @@ class TestCalicoPythonUtils(unittest.TestCase):
             detections.append(detection)
         # Estimate everything and compare.
         actual_intrinsics, actual_R_world_camera, actual_t_world_camera =\
-            calico.InitializePinholeAndPoses(detections, model_definition)
+            InitializePinholeAndPoses(detections, model_definition)
         np.testing.assert_almost_equal(
             true_intrinsics, actual_intrinsics, decimal=3)
         for actual_R, actual_t, expected_R, expected_t in \
